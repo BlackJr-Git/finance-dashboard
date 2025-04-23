@@ -38,16 +38,15 @@ export default function HomePage() {
         <div className="container relative pb-10">
           <section className="mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-6">
             <h1 className="text-center text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]">
-              Sidebar example built on top of shadcn/ui
+              Finance App
             </h1>
             <span className="max-w-[750px] text-center text-lg font-light text-foreground">
-              A stunning and functional retractable sidebar for Next.js using
-              shadcn/ui complete with desktop and mobile responsiveness.
+              Une application de gestion financière pour les entreprises.
             </span>
             <div className="flex w-full items-center justify-center space-x-4 py-4 md:pb-6">
               <Button variant="default" asChild>
                 <Link href="/dashboard">
-                  Demo
+                  Commencer
                   <ArrowRightIcon className="ml-2" />
                 </Link>
               </Button>
@@ -57,7 +56,7 @@ export default function HomePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Learn shadcn/ui
+                  En savoir plus
                 </Link>
               </Button>
             </div>
@@ -108,16 +107,6 @@ export default function HomePage() {
             >
               shadcn/ui
             </Link>
-            . The source code is available on{" "}
-            <Link
-              href="https://github.com/salimi-my/shadcn-ui-sidebar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              GitHub
-            </Link>
-            .
           </p>
         </div>
       </footer>

@@ -1,0 +1,217 @@
+{
+    "forecasts": [
+      {
+        "id": "forecast-2026",
+        "startYear": 2026,
+        "salesRevenues": 46800,
+        "currentForecast": true,
+        "financialResume": {
+          "netIncome": 8400,
+          "operatingIncome": 12000,
+          "shareholdersEquity": 8400
+        },
+        "forecastBudgets": [
+          {
+            "budgetType": "REVENUE",
+            "entries": [
+              {
+                "title": "Création de site vitrine",
+                "januaryValue": 3000,
+                "februaryValue": 2000,
+                "marchValue": 2500,
+                "aprilValue": 4000,
+                "mayValue": 3000,
+                "juneValue": 3000,
+                "julyValue": 4500,
+                "augustValue": 3500,
+                "septemberValue": 3000,
+                "octoberValue": 3000,
+                "novemberValue": 2500,
+                "decemberValue": 3000,
+                "unitPrice": 1500,
+                "productionPrice": 300,
+                "cashFlowType": "INCOME"
+              },
+              {
+                "title": "Maintenance mensuelle",
+                "januaryValue": 500,
+                "februaryValue": 500,
+                "marchValue": 500,
+                "aprilValue": 500,
+                "mayValue": 500,
+                "juneValue": 500,
+                "julyValue": 500,
+                "augustValue": 500,
+                "septemberValue": 500,
+                "octoberValue": 500,
+                "novemberValue": 500,
+                "decemberValue": 500,
+                "unitPrice": 100,
+                "productionPrice": 20,
+                "cashFlowType": "INCOME"
+              }
+            ]
+          },
+          {
+            "budgetType": "PERSONNEL",
+            "entries": [
+              {
+                "title": "Salaires développeurs",
+                "januaryValue": 2000,
+                "februaryValue": 2000,
+                "marchValue": 2000,
+                "aprilValue": 2000,
+                "mayValue": 2000,
+                "juneValue": 2000,
+                "julyValue": 2000,
+                "augustValue": 2000,
+                "septemberValue": 2000,
+                "octoberValue": 2000,
+                "novemberValue": 2000,
+                "decemberValue": 2000,
+                "cashFlowType": "EXPENSE"
+              }
+            ]
+          }
+        ],
+        "salesMarginRates": [
+          {
+            "rate": 0.25,
+            "title": "vitrine"
+          }
+        ],
+        "forecastArticles": [
+          {
+            "title": "vitrine",
+            "articleType": "SERVICE",
+            "unitPrice": 1500,
+            "productionPrice": 300,
+            "januaryValue": 2,
+            "februaryValue": 1,
+            "marchValue": 2,
+            "aprilValue": 3,
+            "mayValue": 2,
+            "juneValue": 2,
+            "julyValue": 3,
+            "augustValue": 2,
+            "septemberValue": 2,
+            "octoberValue": 2,
+            "novemberValue": 1,
+            "decemberValue": 2
+          }
+        ],
+        "financialForecast": {
+          "expenses": 24000,
+          "revenues": 46800,
+          "articlesSum": 15600
+        }
+      },
+      {
+        "id": "forecast-2027",
+        "startYear": 2027,
+        "salesRevenues": 55200,
+        "currentForecast": false,
+        "financialResume": {
+          "netIncome": 10800,
+          "operatingIncome": 14400,
+          "shareholdersEquity": 19200
+        },
+        "forecastBudgets": [
+          {
+            "budgetType": "REVENUE",
+            "entries": [
+              {
+                "title": "Création de site vitrine",
+                "januaryValue": 3500,
+                "februaryValue": 2500,
+                "marchValue": 3000,
+                "aprilValue": 4000,
+                "mayValue": 3500,
+                "juneValue": 3500,
+                "julyValue": 5000,
+                "augustValue": 4000,
+                "septemberValue": 4000,
+                "octoberValue": 3000,
+                "novemberValue": 3000,
+                "decemberValue": 3200,
+                "unitPrice": 1600,
+                "productionPrice": 350,
+                "cashFlowType": "INCOME"
+              },
+              {
+                "title": "SEO mensuel",
+                "januaryValue": 800,
+                "februaryValue": 800,
+                "marchValue": 800,
+                "aprilValue": 800,
+                "mayValue": 800,
+                "juneValue": 800,
+                "julyValue": 800,
+                "augustValue": 800,
+                "septemberValue": 800,
+                "octoberValue": 800,
+                "novemberValue": 800,
+                "decemberValue": 800,
+                "unitPrice": 200,
+                "productionPrice": 50,
+                "cashFlowType": "INCOME"
+              }
+            ]
+          },
+          {
+            "budgetType": "PERSONNEL",
+            "entries": [
+              {
+                "title": "Salaires développeurs",
+                "januaryValue": 2200,
+                "februaryValue": 2200,
+                "marchValue": 2200,
+                "aprilValue": 2200,
+                "mayValue": 2200,
+                "juneValue": 2200,
+                "julyValue": 2200,
+                "augustValue": 2200,
+                "septemberValue": 2200,
+                "octoberValue": 2200,
+                "novemberValue": 2200,
+                "decemberValue": 2200,
+                "cashFlowType": "EXPENSE"
+              }
+            ]
+          }
+        ],
+        "salesMarginRates": [
+          {
+            "rate": 0.3,
+            "title": "vitrine"
+          }
+        ],
+        "forecastArticles": [
+          {
+            "title": "vitrine",
+            "articleType": "SERVICE",
+            "unitPrice": 1600,
+            "productionPrice": 350,
+            "januaryValue": 2,
+            "februaryValue": 2,
+            "marchValue": 2,
+            "aprilValue": 3,
+            "mayValue": 2,
+            "juneValue": 2,
+            "julyValue": 3,
+            "augustValue": 2,
+            "septemberValue": 3,
+            "octoberValue": 2,
+            "novemberValue": 2,
+            "decemberValue": 2
+          }
+        ],
+        "financialForecast": {
+          "expenses": 26400,
+          "revenues": 55200,
+          "articlesSum": 18720
+        }
+      }
+    ]
+  }
+  

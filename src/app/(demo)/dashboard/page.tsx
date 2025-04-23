@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/tooltip";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { useStore } from "@/hooks/use-store";
+import {Chip} from "@heroui/react";
 
 export default function DashboardPage() {
   const sidebar = useStore(useSidebar, (x) => x);
@@ -36,6 +37,7 @@ export default function DashboardPage() {
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbPage>Dashboard</BreadcrumbPage>
+            <Chip>Dashboard</Chip>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -69,6 +71,7 @@ export default function DashboardPage() {
             </TooltipTrigger>
             <TooltipContent>
               <p>Hide sidebar</p>
+              
             </TooltipContent>
           </Tooltip>
         </div>
