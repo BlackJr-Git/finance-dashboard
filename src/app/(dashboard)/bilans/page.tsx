@@ -1,6 +1,6 @@
+"use client";
+import React from "react";
 import Link from "next/link";
-
-import PlaceholderContent from "@/components/demo/placeholder-content";
 import { ContentLayout } from "@/components/admin-panel/content-layout";
 import {
   Breadcrumb,
@@ -10,15 +10,17 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
+import { BalanceSheet } from "@/components/Bilans";
+import { Separator } from "@/components/ui/separator";
 
-export default function PostsPage() {
+export default function BilansPages() {
   return (
-    <ContentLayout title="All Posts">
+    <ContentLayout title="Bilans">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href="/">Home</Link>
+              <Link href="/">Accueil</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -29,11 +31,17 @@ export default function PostsPage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Posts</BreadcrumbPage>
+            <BreadcrumbPage>Bilans</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <PlaceholderContent />
+      
+      <div className="mt-8">
+        <h1 className="text-3xl font-bold mb-2">Bilan Financier</h1>
+        <p className="text-muted-foreground mb-6">Vue d&apos;ensemble des actifs et passifs de l&apos;entreprise</p>
+        <Separator className="mb-8" />
+        <BalanceSheet />
+      </div>
     </ContentLayout>
   );
 }
