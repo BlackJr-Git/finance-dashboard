@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -20,15 +20,24 @@ import {
   GlobeIcon,
   HeartHandshakeIcon,
   PiggyBankIcon,
-  HandCoinsIcon
+  HandCoinsIcon,
+  ChevronDownIcon,
+  ChevronUpIcon
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import * as Collapsible from "@radix-ui/react-collapsible";
 
 // Types
 interface FinanceItemProps {
   title: string;
   amount: number;
   icon: React.ReactNode;
+  subItems?: SubItemProps[];
+}
+
+interface SubItemProps {
+  title: string;
+  amount: number;
 }
 
 interface FinanceColumnProps {
@@ -38,20 +47,68 @@ interface FinanceColumnProps {
   className?: string;
 }
 
-// Composant pour chaque élément financier (ligne)
-const FinanceItem: React.FC<FinanceItemProps> = ({ title, amount, icon }) => {
+// Composant pour chaque sous-item (ligne intérieure d'un accordion)
+const SubItem: React.FC<SubItemProps> = ({ title, amount }) => {
   return (
-    <div className="flex items-center justify-between rounded-lg border p-3 mb-3">
-      <div className="flex items-center gap-3">
-        <div className="rounded-full bg-primary/10 p-2 text-primary">
-          {icon}
-        </div>
-        <div className="font-medium">{title}</div>
-      </div>
+    <div className="flex items-center justify-between py-2 px-3 ml-10 border-b border-dashed border-gray-200">
+      <div className="text-sm font-medium text-gray-600">{title}</div>
       <Badge variant="outline" className="font-mono text-sm">
-        {amount > 0 ? `${amount}$` : "-"}
+        {amount > 0 ? `${amount}$` : "0$"}
       </Badge>
     </div>
+  );
+};
+
+// Composant pour chaque élément financier avec accordion
+const FinanceItem: React.FC<FinanceItemProps> = ({ title, amount, icon, subItems = [] }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const hasSubItems = subItems && subItems.length > 0;
+
+  return (
+    <Collapsible.Root
+      open={isOpen}
+      onOpenChange={setIsOpen}
+      className="mb-3"
+    >
+      <Collapsible.Trigger asChild className="w-full">
+        <div className="flex items-center justify-between rounded-lg border p-3 cursor-pointer hover:bg-primary/5 transition-colors">
+          <div className="flex items-center gap-3">
+            <div className="rounded-full bg-primary/10 p-2 text-primary">
+              {icon}
+            </div>
+            <div className="font-medium">{title}</div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Badge variant="outline" className="font-mono text-sm">
+              {amount > 0 ? `${amount}$` : "0$"}
+            </Badge>
+            {hasSubItems && (
+              <div className="text-gray-500">
+                {isOpen ? (
+                  <ChevronUpIcon className="h-4 w-4" />
+                ) : (
+                  <ChevronDownIcon className="h-4 w-4" />
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </Collapsible.Trigger>
+      
+      {hasSubItems && (
+        <Collapsible.Content className="overflow-hidden border-x border-b rounded-b-lg bg-gray-50">
+          <div className="py-1 space-y-1">
+            {subItems.map((subItem, index) => (
+              <SubItem
+                key={index}
+                title={subItem.title}
+                amount={subItem.amount}
+              />
+            ))}
+          </div>
+        </Collapsible.Content>
+      )}
+    </Collapsible.Root>
   );
 };
 
@@ -77,6 +134,7 @@ const FinanceColumn: React.FC<FinanceColumnProps> = ({
             title={item.title}
             amount={item.amount}
             icon={item.icon}
+            subItems={item.subItems}
           />
         ))}
       </CardContent>
@@ -119,22 +177,41 @@ export const InvestmentFinancing = () => {
   const needsItems = [
     {
       title: "Immobilisations incorporelles",
-      amount: 100,
-      icon: <GlobeIcon className="h-4 w-4" />
+      amount: 0,
+      icon: <GlobeIcon className="h-4 w-4" />,
+      subItems: [
+        { title: "Frais d'établissements", amount: 0 },
+        { title: "Frais d'ouverture de comptes", amount: 0 },
+        { title: "Logiciels, Formations", amount: 0 },
+        { title: "Dépôt marque, brevet, modèle", amount: 0 },
+        { title: "Droits d'entrée", amount: 0 },
+        { title: "Achat fond de commerce ou parts", amount: 0 },
+        { title: "Droit au bail", amount: 0 },
+        { title: "Caution ou dépôt de garantie", amount: 0 },
+        { title: "Frais de dossier", amount: 0 },
+        { title: "Frais de notaire ou d'avocat", amount: 0 }
+      ]
     },
     {
       title: "Immobilisations corporelles",
-      amount: 200,
-      icon: <BuildingIcon className="h-4 w-4" />
+      amount: 0,
+      icon: <BuildingIcon className="h-4 w-4" />,
+      subItems: [
+        { title: "Enseigne et éléments de communication", amount: 0 },
+        { title: "Achat immobilier", amount: 0 },
+        { title: "Travaux et aménagements", amount: 0 },
+        { title: "Matériel", amount: 0 },
+        { title: "Matériel de bureau", amount: 0 }
+      ]
     },
     {
       title: "Stock de matières et produits",
-      amount: 75,
+      amount: 0,
       icon: <ArchiveIcon className="h-4 w-4" />
     },
     {
       title: "Trésorerie de départ",
-      amount: 70,
+      amount: 0,
       icon: <BanknoteIcon className="h-4 w-4" />
     }
   ];
@@ -143,17 +220,25 @@ export const InvestmentFinancing = () => {
   const resourcesItems = [
     {
       title: "Apport personnel",
-      amount: 150,
-      icon: <UserIcon className="h-4 w-4" />
+      amount: 0,
+      icon: <UserIcon className="h-4 w-4" />,
+      subItems: [
+        { title: "Apport personnel", amount: 0 },
+        { title: "Apport familial", amount: 0 }
+      ]
     },
     {
       title: "Emprunt",
-      amount: 200,
-      icon: <BanknoteIcon className="h-4 w-4" />
+      amount: 0,
+      icon: <BanknoteIcon className="h-4 w-4" />,
+      subItems: [
+        { title: "Subventions", amount: 0 },
+        { title: "Prêt bancaire", amount: 0 }
+      ]
     },
     {
       title: "Subvention",
-      amount: 98,
+      amount: 0,
       icon: <HeartHandshakeIcon className="h-4 w-4" />
     },
     {
@@ -163,9 +248,19 @@ export const InvestmentFinancing = () => {
     }
   ];
 
-  // Calcul des totaux
-  const totalNeeds = needsItems.reduce((sum, item) => sum + item.amount, 0);
-  const totalResources = resourcesItems.reduce((sum, item) => sum + item.amount, 0);
+  // Calcul des totaux, avec prise en compte de sous-items
+  const calculateTotalWithSubItems = (items: FinanceItemProps[]): number => {
+    return items.reduce((sum: number, item: FinanceItemProps) => {
+      if (item.subItems && item.subItems.length > 0) {
+        // Mise à jour du montant de l'item parent en fonction de ses sous-items
+        item.amount = item.subItems.reduce((subSum: number, subItem: SubItemProps) => subSum + subItem.amount, 0);
+      }
+      return sum + item.amount;
+    }, 0);
+  };
+
+  const totalNeeds = calculateTotalWithSubItems(needsItems);
+  const totalResources = calculateTotalWithSubItems(resourcesItems);
   
   // Calcul de la différence
   const difference = totalResources - totalNeeds;
