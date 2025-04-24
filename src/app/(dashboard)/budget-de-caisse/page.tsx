@@ -14,10 +14,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import data from "@/lib/data/fake-data.json";
 import { ChartAreaInteractive } from "@/components/Budget-Caisse/chartArea";
 import { SectionCards } from "@/components/Budget-Caisse/sectionCards";
-import { SideDetailsBudget } from "@/components/Budget-Caisse/side-details";
 import { MoreForecastInfo } from "@/components/Budget-Caisse/moreForecastInfo";
 
-export default function CategoriesPage() {
+export default function BudgetDeCaisse() {
   const forecast = data.forecasts;
   return (
     <ContentLayout title="Budget de Caisse">

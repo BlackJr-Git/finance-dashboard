@@ -12,7 +12,10 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SideDetailsBudget } from "@/components/Budget-Caisse/side-details";
 import { PieChartSection } from "@/components/Budget-Caisse/PieChartSection";
-import { DetailsList, DetailsListItem } from "@/components/Budget-Caisse/DetailsList";
+import {
+  DetailsList,
+  DetailsListItem
+} from "@/components/Budget-Caisse/DetailsList";
 import { ArrowRight, ChevronRight, ExternalLink, Calendar } from "lucide-react";
 import Link from "next/link";
 
@@ -61,51 +64,52 @@ export function MoreForecastInfo({ forecast }: { forecast: any }) {
       title: "Autres entrées de fonds",
       amount: "5 191 €",
       description: "Subventions, prêts et autres ressources externes",
-      href: "budget-de-caisse/autres-entres-de-fonds",
+      href: "budget-de-caisse/autres-entres-de-fonds"
     },
     {
-      title: "Produit d'Exploitation",
+      title: "Produit d'exploitation",
       amount: "2 490 €",
       description: "Revenus générés par l'activité principale de l'entreprise",
-    },
+      href: "budget-de-caisse/produits-exploitations"
+    }
   ];
 
   const depensesDetails: DetailsListItem[] = [
     {
       title: "Besoins de démarrage",
       amount: "$ 3 000",
-      description: "Cliquez dessus pour avoir plus détails",
+      description: "Cliquez dessus pour avoir plus détails"
     },
     {
       title: "Charges d'exploitation",
       amount: "$ 1 245",
-      description: "Cliquez dessus pour avoir plus détails",
+      description: "Cliquez dessus pour avoir plus détails"
     },
     {
       title: "Charges fixes (Charges Externes)",
       amount: "$ 0",
-      description: "Cliquez dessus pour avoir plus détails",
+      description: "Cliquez dessus pour avoir plus détails"
     },
     {
       title: "Charges du personnel",
       amount: "$ 1 848",
-      description: "Cliquez dessus pour avoir plus détails",
+      description: "Cliquez dessus pour avoir plus détails"
     },
     {
       title: "Charges sociales",
       amount: "$ 220",
-      description: "Cliquez dessus pour avoir plus détails",
+      description: "Cliquez dessus pour avoir plus détails"
     },
     {
       title: "Valeur ajoutée",
       amount: "$ 0",
-      description: "Cliquez dessus pour avoir plus détails",
+      description: "Cliquez dessus pour avoir plus détails"
     },
     {
       title: "Excédent brut d'exploitation",
       amount: "$ 0",
-      description: "Cliquez dessus pour avoir plus détails",
-    },
+      description: "Cliquez dessus pour avoir plus détails"
+    }
   ];
 
   return (
@@ -130,7 +134,9 @@ export function MoreForecastInfo({ forecast }: { forecast: any }) {
               chartLabel={`Répartition des entrées financières pour l'exercice ${forecast.startYear}`}
             />
             <div className="flex flex-col">
-              <h3 className="font-medium mb-4">Détails des Sources de Financement</h3>
+              <h3 className="font-medium mb-4">
+                Détails des Sources de Financement
+              </h3>
               <DetailsList items={recettesDetails} />
             </div>
           </div>
@@ -145,8 +151,14 @@ export function MoreForecastInfo({ forecast }: { forecast: any }) {
               chartLabel={`Répartition des charges pour l'exercice ${forecast.startYear}`}
             />
             <div className="md:col-span-2">
-              <h3 className="font-medium mb-1 col-span-2">Détail des Charges</h3>
-              <DetailsList items={depensesDetails} amountClassName="text-xl" gridCols={2} />
+              <h3 className="font-medium mb-1 col-span-2">
+                Détail des Charges
+              </h3>
+              <DetailsList
+                items={depensesDetails}
+                amountClassName="text-xl"
+                gridCols={2}
+              />
             </div>
           </div>
         </TabsContent>
@@ -171,7 +183,7 @@ export function MoreForecastInfo({ forecast }: { forecast: any }) {
                   { mois: "Septembre", value: 26443 },
                   { mois: "Octobre", value: 26072 },
                   { mois: "Novembre", value: 26038 },
-                  { mois: "Décembre", value: 25847 },
+                  { mois: "Décembre", value: 25847 }
                 ].map(({ mois, value }) => (
                   <div key={mois}>
                     <Card className="h-full">
@@ -182,8 +194,13 @@ export function MoreForecastInfo({ forecast }: { forecast: any }) {
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="pt-0">
-                        <span className={`text-2xl font-bold ${value < 0 ? "text-red-500" : "text-primary"}`}>
-                          {value < 0 ? "-" : ""}{Math.abs(value).toLocaleString()} $
+                        <span
+                          className={`text-2xl font-bold ${
+                            value < 0 ? "text-red-500" : "text-primary"
+                          }`}
+                        >
+                          {value < 0 ? "-" : ""}
+                          {Math.abs(value).toLocaleString()} $
                         </span>
                       </CardContent>
                     </Card>

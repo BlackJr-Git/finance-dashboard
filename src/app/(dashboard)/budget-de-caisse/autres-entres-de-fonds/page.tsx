@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 
-import PlaceholderContent from "@/components/demo/placeholder-content";
 import { ContentLayout } from "@/components/admin-panel/content-layout";
 import {
   Breadcrumb,
@@ -12,12 +11,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import data from "@/lib/data/fake-data.json";
-import { ChartAreaInteractive } from "@/components/Budget-Caisse/chartArea";
-import { SectionCards } from "@/components/Budget-Caisse/sectionCards";
-import { SideDetailsBudget } from "@/components/Budget-Caisse/side-details";
-import { MoreForecastInfo } from "@/components/Budget-Caisse/moreForecastInfo";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Edit, Copy, Trash2, Eye } from "lucide-react";
