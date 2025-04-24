@@ -24,7 +24,7 @@ export function MoreForecastInfo({ forecast }: { forecast: any }) {
       color: "hsl(var(--chart-1))"
     },
     {
-      name: "Produit d&apos;Exploitation",
+      name: "Produit d'exploitation",
       value: 2490,
       color: "hsl(var(--chart-2))"
     }
@@ -33,23 +33,23 @@ export function MoreForecastInfo({ forecast }: { forecast: any }) {
   // Données pour le graphique circulaire des dépenses
   const expensesPieChartData = [
     {
-      name: "Charges du personnel",
+      name: "C.P",
       value: 1848,
       color: "hsl(var(--chart-3))"
     },
     {
-      name: "Besoin de démarrage",
+      name: "B.D",
       value: 3548,
       color: "hsl(var(--chart-5))"
     },
     {
-      name: "Charges d'exploitation",
+      name: "C.E",
       value: 3548,
       color: "hsl(var(--chart-1))"
     },
     {
-      name: "Autres charges",
-      value: 0,
+      name: "Autres",
+      value: 1200,
       color: "hsl(var(--chart-4))"
     }
   ];
