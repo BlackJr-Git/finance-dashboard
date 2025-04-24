@@ -56,7 +56,7 @@ export function getMenuList(pathname: string): Group[] {
           label: "Budget de Caisse",
           icon: DollarSign,
           submenus: [],
-          active: pathname === "/budget-de-caisse"
+          active: pathname.startsWith("/budget-de-caisse")
         },
         {
           href: "/bilans",
