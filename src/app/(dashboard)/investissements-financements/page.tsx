@@ -1,6 +1,6 @@
+"use client";
+import React from "react";
 import Link from "next/link";
-
-import PlaceholderContent from "@/components/demo/placeholder-content";
 import { ContentLayout } from "@/components/admin-panel/content-layout";
 import {
   Breadcrumb,
@@ -10,6 +10,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
+import { InvestmentFinancing } from "@/components/Investissements-Financements";
+import { Separator } from "@/components/ui/separator";
 
 export default function InvestissementsFinancementsPage() {
   return (
@@ -18,7 +20,7 @@ export default function InvestissementsFinancementsPage() {
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href="/">Home</Link>
+              <Link href="/">Accueil</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -33,7 +35,13 @@ export default function InvestissementsFinancementsPage() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <PlaceholderContent />
+      
+      <div className="mt-8">
+        <h1 className="text-3xl font-bold mb-2">Plan de financement initial</h1>
+        <p className="text-muted-foreground mb-6">Équilibrez vos besoins et ressources de financement</p>
+        <Separator className="mb-8" />
+        <InvestmentFinancing />
+      </div>
     </ContentLayout>
   );
 }
