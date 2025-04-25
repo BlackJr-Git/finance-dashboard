@@ -1,0 +1,273 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum BudgetType {
+  REVENUE
+  ESTABLISHMENT
+  OPERATION
+  FIXED
+  PERSONNEL
+  SOCIAL_CHARGES
+  TAXES
+  FINANCIAL
+  PREVIOUS_BALANCE
+}
+
+enum ArticleType {
+  PRODUCT
+  SERVICE
+}
+
+enum CashFlowType {
+  INCOME
+  EXPENSE
+}
+
+// Modèles NextAuth pour l'authentification
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// Modèle utilisateur étendu
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  projects      Project[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// Modèles applicatifs
+model Project {
+  id           String     @id @default(uuid())
+  title        String
+  description  String?
+  startDate    DateTime?
+  endDate      DateTime?
+  
+  // Relations
+  user         User       @relation(fields: [userId], references: [id])
+  userId       String
+  // products     Product[]
+  forecasts    Forecast[]
+  // finances     Finance?
+  
+  // Métadonnées
+  lastModified DateTime   @default(now())
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Forecast {
+  id               String              @id @default(uuid()) // Identifiant unique
+  startYear        Int                 // Année de début (ex: 2025)
+
+  // Relations
+  project          Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId        String
+
+
+  forecastBudgets  ForecastBudget[]    // Liste des budgets
+  forecastArticles ForecastArticle[]   // Articles de vente
+  // financialResume  FinancialResume?    // Résumé financier lié
+  // salesMarginRates SalesMarginRate[]   // Taux de marge
+  // financialForecast FinancialForecast? // Synthèse financière
+}
+
+model ForecastBudget {
+  id         String     @id @default(uuid())
+  budgetType BudgetType // Catégorie via enum (établissement, personnel...)
+  
+  forecastId String
+  forecast   Forecast @relation(fields: [forecastId], references: [id])
+  entries    BudgetTypeEntry[] // Entrées détaillées
+}
+
+model BudgetTypeEntry {
+  id              String @id @default(uuid())
+  title           String // Libellé (ex: "Subventions")
+  budgetType      BudgetType
+  cashFlowType    CashFlowType
+  
+  // Valeurs mensuelles nullable
+  januaryValue    Float @default(0)
+  februaryValue   Float @default(0)
+  marchValue      Float @default(0)
+  aprilValue      Float @default(0)
+  mayValue        Float @default(0)
+  juneValue       Float @default(0)
+  julyValue       Float @default(0)
+  augustValue     Float @default(0)
+  septemberValue  Float @default(0)
+  octoberValue    Float @default(0)
+  novemberValue   Float @default(0)
+  decemberValue   Float @default(0)
+  
+  // Spécifiques aux articles
+  unitPrice       Float @default(0)      // Prix unitaire (15€)
+  productionPrice Float @default(0)      // Coût de production (1€)
+  articleType     ArticleType? // Produit/Service
+
+  budgetId String
+  budget   ForecastBudget @relation(fields: [budgetId], references: [id])
+}
+
+
+
+model ForecastArticle {
+  id             String @id @default(uuid())
+  title          String     // Nom article (ex: "bonbon")
+  articleType    ArticleType // Produit/Service
+  unitPrice      Float      // Prix de vente (15€)
+  productionPrice Float     // Coût de production (1€)
+  
+  // Valeurs mensuelles de vente
+  januaryValue   Float @default(0)
+  februaryValue  Float @default(0)
+  marchValue     Float @default(0)
+  aprilValue     Float @default(0)
+  mayValue       Float @default(0)
+  juneValue      Float @default(0)
+  julyValue      Float @default(0)
+  augustValue    Float @default(0)
+  septemberValue Float @default(0)
+  octoberValue   Float @default(0)
+  novemberValue  Float @default(0)
+  decemberValue  Float @default(0)
+  
+  forecastId String
+  forecast   Forecast @relation(fields: [forecastId], references: [id])
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Modèle de produit avec les valeurs mensuelles
+// model Product {
+//   id              String    @id @default(uuid())
+//   title           String
+//   articleType     String
+//   unitPrice       Float
+//   productionPrice Float
+  
+//   // Valeurs mensuelles
+//   januaryValue    Float     @default(0)
+//   februaryValue   Float     @default(0)
+//   marchValue      Float     @default(0)
+//   aprilValue      Float     @default(0)
+//   mayValue        Float     @default(0)
+//   juneValue       Float     @default(0)
+//   julyValue       Float     @default(0)
+//   augustValue     Float     @default(0)
+//   septemberValue  Float     @default(0)
+//   octoberValue    Float     @default(0)
+//   novemberValue   Float     @default(0)
+//   decemberValue   Float     @default(0)
+  
+//   // Relation avec le projet
+//   // project         Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+//   // projectId       String
+  
+//   // Métadonnées
+//   createdAt       DateTime  @default(now())
+//   updatedAt       DateTime  @updatedAt
+// }
+
+// Modèle pour les finances du projet
+// model Finance {
+//   id                  String   @id @default(uuid())
+  
+//   // Données de bilan
+//   totalAssets         Float    @default(0)
+//   totalLiabilities    Float    @default(0)
+  
+//   // Seuil de rentabilité
+//   breakEvenPoint      Float?
+  
+//   // Besoin en fonds de roulement
+//   workingCapital      Float?
+//   clientDelayDays     Int      @default(30)
+//   supplierDelayDays   Int      @default(30)
+//   stockDelayDays      Int      @default(60)
+  
+//   // Relation avec le projet
+//   project             Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+//   projectId           String   @unique
+  
+//   // Métadonnées
+//   createdAt           DateTime @default(now())
+//   updatedAt           DateTime @updatedAt
+// }

@@ -1,8 +1,11 @@
 import  { AuthOptions, TokenSet } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import KeycloakProvider from "next-auth/providers/keycloak";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import prisma from "@/lib/shared/prisma";
 
 export const authOptions: AuthOptions = {
+  adapter: PrismaAdapter(prisma), // Enregistrer dans la DB via Prisma
   providers: [
     KeycloakProvider({
       clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT__CSR_ID!,
