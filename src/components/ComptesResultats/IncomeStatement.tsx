@@ -589,34 +589,6 @@ export const IncomeStatement = () => {
         </Tabs>
       </div>
 
-      {/* Cartes de statistiques */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <StatCard
-          title="Revenus"
-          value={currentYearData.revenue}
-          previousValue={previousYearData.revenue}
-          icon={<TrendingUpIcon className="h-5 w-5" />}
-          trend={revenueGrowth > 0 ? "up" : revenueGrowth < 0 ? "down" : "neutral"}
-          color={COLORS.revenue}
-        />
-        <StatCard
-          title="Dépenses"
-          value={currentYearData.expenses}
-          previousValue={previousYearData.expenses}
-          icon={<WalletIcon className="h-5 w-5" />}
-          trend={expensesGrowth > 0 ? "down" : expensesGrowth < 0 ? "up" : "neutral"}
-          color={COLORS.expenses}
-        />
-        <StatCard
-          title="Résultat Net"
-          value={currentYearData.profit}
-          previousValue={previousYearData.profit}
-          icon={<PiggyBankIcon className="h-5 w-5" />}
-          trend={profitGrowth > 0 ? "up" : profitGrowth < 0 ? "down" : "neutral"}
-          color={COLORS.profit}
-        />
-      </div>
-
       {/* Graphiques */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
@@ -658,6 +630,70 @@ export const IncomeStatement = () => {
             />
           </CardContent>
         </Card>
+      </div>
+
+      {/* Tableau des données détaillées */}
+      <Card className="overflow-hidden mt-8">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <DollarSignIcon className="h-5 w-5 text-primary" />
+            Compte de résultat détaillé
+          </CardTitle>
+          <CardDescription>
+            Détail des produits et charges par année
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="p-0">
+          <div className="overflow-auto">
+            {/* En-tête du tableau */}
+            <IncomeStatementHeader yearKeys={YEAR_KEYS} />
+            
+            {/* Corps du tableau avec les données */}
+            <div className="space-y-0.5 mt-0.5">
+              {incomeStatementData.map((item, index) => (
+                <IncomeStatementRow
+                  key={index}
+                  label={item.label}
+                  values={item.values}
+                  icon={item.icon}
+                  isExpandable={item.isExpandable}
+                  subItems={item.subItems}
+                  isTotal={item.isTotal}
+                  variant={item.variant}
+                  yearKeys={YEAR_KEYS}
+                />
+              ))}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Cartes de statistiques */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <StatCard
+          title="Revenus"
+          value={currentYearData.revenue}
+          previousValue={previousYearData.revenue}
+          icon={<TrendingUpIcon className="h-5 w-5" />}
+          trend={revenueGrowth > 0 ? "up" : revenueGrowth < 0 ? "down" : "neutral"}
+          color={COLORS.revenue}
+        />
+        <StatCard
+          title="Dépenses"
+          value={currentYearData.expenses}
+          previousValue={previousYearData.expenses}
+          icon={<WalletIcon className="h-5 w-5" />}
+          trend={expensesGrowth > 0 ? "down" : expensesGrowth < 0 ? "up" : "neutral"}
+          color={COLORS.expenses}
+        />
+        <StatCard
+          title="Résultat Net"
+          value={currentYearData.profit}
+          previousValue={previousYearData.profit}
+          icon={<PiggyBankIcon className="h-5 w-5" />}
+          trend={profitGrowth > 0 ? "up" : profitGrowth < 0 ? "down" : "neutral"}
+          color={COLORS.profit}
+        />
       </div>
 
       {/* Distribution des revenus et dépenses */}
@@ -703,41 +739,6 @@ export const IncomeStatement = () => {
         </Card>
       </div>
 
-      {/* Tableau des données détaillées */}
-      <Card className="overflow-hidden mt-8">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <DollarSignIcon className="h-5 w-5 text-primary" />
-            Compte de résultat détaillé
-          </CardTitle>
-          <CardDescription>
-            Détail des produits et charges par année
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="p-0">
-          <div className="overflow-auto">
-            {/* En-tête du tableau */}
-            <IncomeStatementHeader yearKeys={YEAR_KEYS} />
-            
-            {/* Corps du tableau avec les données */}
-            <div className="space-y-0.5 mt-0.5">
-              {incomeStatementData.map((item, index) => (
-                <IncomeStatementRow
-                  key={index}
-                  label={item.label}
-                  values={item.values}
-                  icon={item.icon}
-                  isExpandable={item.isExpandable}
-                  subItems={item.subItems}
-                  isTotal={item.isTotal}
-                  variant={item.variant}
-                  yearKeys={YEAR_KEYS}
-                />
-              ))}
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 };
