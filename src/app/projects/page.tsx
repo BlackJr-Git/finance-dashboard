@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { PlusCircle, FileText, Edit2, Calendar } from "lucide-react";
@@ -8,25 +8,51 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ContentLayout } from "@/components/admin-panel/content-layout";
+import { CreateProjectModal } from "@/components/projects/CreateProjectModal";
 
 export default function ProjectsPage() {
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+
   const projects = [
     {
       id: "projet-finance-1",
       title: "Budget prévisionnel 2025",
       description:
         "Budget prévisionnel annuel avec analyse financière détaillée",
-      lastModified: "11/04/2025",
-      model: "Modèle Générique"
+      lastModified: "11/04/2025"
     },
     {
       id: "projet-finance-2",
       title: "Plan d'investissement Q2",
       description: "Plan d'investissement pour le deuxième trimestre",
-      lastModified: "15/04/2025",
-      model: "Modèle POSEC"
+      lastModified: "15/04/2025"
     }
   ];
+
+  const handleCreateProject = (project: { 
+    title: string; 
+    description: string; 
+    startDate: Date | undefined; 
+    endDate: Date | undefined; 
+  }) => {
+    // Logique pour créer un nouveau projet
+    // Dans une application réelle, vous feriez un appel à l'API ici
+    console.log("Nouveau projet créé:", project);
+    
+    // Exemple simple d'ajout d'un projet à la liste (à adapter selon votre logique métier)
+    const newProject = {
+      id: `projet-finance-${projects.length + 1}`,
+      title: project.title,
+      description: project.description,
+      lastModified: new Date().toLocaleDateString('fr-FR')
+    };
+    
+    // Vous pourriez utiliser une fonction setState ou un hook personnalisé pour mettre à jour la liste
+    // setProjets([...projects, newProject]);
+    
+    // Rediriger vers le nouveau projet
+    // router.push(`/projects/${newProject.id}/dashboard`);
+  };
 
   return (
     <ContentLayout title="Mes Projets Financiers">
@@ -46,7 +72,10 @@ export default function ProjectsPage() {
           <div className="flex-1 space-y-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Create New Project Card */}
-              <Link href="/projects/new" className="group">
+              <div 
+                onClick={() => setIsCreateModalOpen(true)}
+                className="group cursor-pointer"
+              >
                 <Card className="border-2 border-dashed h-full flex flex-col justify-center items-center p-6 hover:border-primary/70 transition-colors cursor-pointer">
                   <CardContent className="flex flex-col items-center justify-center pt-6">
                     <div className="rounded-full bg-muted w-16 h-16 flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
@@ -60,11 +89,14 @@ export default function ProjectsPage() {
                     </p>
                   </CardContent>
                 </Card>
-              </Link>
+              </div>
 
               {/* Project Cards */}
               {projects.map((project) => (
-                <Link key={project.id} href={`/projects/${project.id}/dashboard`}>
+                <Link
+                  key={project.id}
+                  href={`/projects/${project.id}/dashboard`}
+                >
                   <Card className="h-full hover:border-primary/50 transition-all duration-300 cursor-pointer group overflow-hidden">
                     <CardContent className="p-0">
                       <div className="h-2 bg-primary/80 w-full"></div>
@@ -143,6 +175,13 @@ export default function ProjectsPage() {
           </div>
         </div>
       </div>
+      
+      {/* Modal de création de projet */}
+      <CreateProjectModal 
+        isOpen={isCreateModalOpen}
+        onOpenChange={setIsCreateModalOpen}
+        onCreateProject={handleCreateProject}
+      />
     </ContentLayout>
   );
 }

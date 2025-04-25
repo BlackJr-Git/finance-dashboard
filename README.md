@@ -1,104 +1,136 @@
-# [shadcn/ui sidebar](https://shadcn-ui-sidebar.salimi.my) &middot; [![Author Salimi](https://img.shields.io/badge/Author-Salimi-%3C%3E)](https://www.salimi.my)
+# Finance App - Application de Gestion de Projets Financiers
 
-A stunning and functional retractable sidebar for Next.js built on top of [shadcn/ui](https://ui.shadcn.com) complete with desktop and mobile responsiveness.
+Finance App est une application complète de gestion de projets financiers permettant aux utilisateurs de créer, gérer et analyser différents aspects financiers de leurs projets d'entreprise.
 
-## Features
+## Aperçu de l'Application
 
-- Retractable mini and wide sidebar
-- Scrollable sidebar menu
-- Sheet menu for mobile
-- Grouped menu with labels
-- Collapsible submenu
-- Extracted menu items list
+Cette application est conçue pour aider les entrepreneurs, gestionnaires financiers et analystes à:
+- Créer des projets financiers structurés
+- Analyser différents aspects financiers (budgets, bilans, seuils de rentabilité)
+- Générer des analyses financières détaillées
+- Visualiser les données via des graphiques et tableaux interactifs
 
-## Tech/framework used
+## Structure et Flux de l'Application
 
-- Next.js 14
-- Shadcn/ui
-- Tailwind CSS
-- TypeScript
-- Zustand
+### Pages Principales
 
-## Installation
+1. **Page d'Accueil** (`/`)
+   - Introduction à l'application
+   - Options de connexion ou d'accès aux projets
 
-### Custom registry
+2. **Projets** (`/projects`)
+   - Liste des projets existants
+   - Option pour créer un nouveau projet
+   - Accès aux projets récents
+   - Informations sur l'utilisation de projets financiers
 
-If you are using @shadcn/ui 2.0.0 or later, you can install the component directly from the registry.
+3. **Tableau de Bord Projet** (`/projects/[project_id]/dashboard`)
+   - Vue d'ensemble du projet sélectionné
+   - Statistiques clés et graphiques sommaires
+   - Accès rapide aux différentes sections du projet
 
-```bash
-npx shadcn@latest add https://raw.githubusercontent.com/salimi-my/shadcn-ui-sidebar/refs/heads/master/public/registry/shadcn-sidebar.json
+4. **Modules Financiers**
+   - Budget de Caisse (`/projects/[project_id]/budget-de-caisse`)
+   - Bilans (`/projects/[project_id]/bilans`)
+   - Investissements & Financements (`/projects/[project_id]/investissements-financements`)
+   - Compte des Résultats (`/projects/[project_id]/compte-resultats`)
+   - Seuils de Rentabilité (`/projects/[project_id]/seuils-rentabilites`)
+   - Besoin en Fonds de Roulement (`/projects/[project_id]/besoins-fonds-roulement`)
 
-or
+5. **Compte Utilisateur** (`/account`)
+   - Profil utilisateur
+   - Paramètres de compte
+   - Gestion des informations personnelles
 
-npx shadcn@latest add https://shadcn-ui-sidebar.salimi.my/registry/shadcn-sidebar.json
-```
+### Flux Utilisateur Typique
 
-### Usage example for Nextjs
-```tsx
-//layout.tsx
-import AdminPanelLayout from "@/components/admin-panel/admin-panel-layout";
+1. L'utilisateur se connecte à l'application
+2. Accède à la page des projets pour voir ses projets existants
+3. Sélectionne un projet existant ou en crée un nouveau
+4. Navigue entre les différents modules financiers pour:
+   - Visualiser des données
+   - Modifier des paramètres
+   - Effectuer des analyses
+5. Exporte ou partage les résultats selon ses besoins
 
-export default async function Layout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return <AdminPanelLayout>{children}</AdminPanelLayout>;
-}
+## Fonctionnalités Principales
 
-//page.tsx
-import { ContentLayout } from "@/components/admin-panel/content-layout";
+### Gestion de Projets
+- Création et gestion de multiples projets financiers
+- Organisation par catégories et types
+- Suivi des modifications et historique
 
-export default function Page() {
-  return (
-    <ContentLayout title="Test">
-      <div>Test</div>
-    </ContentLayout>
-  );
-}
-```
+### Analyses Financières
+- **Tableaux de Produits d'Exploitation**
+  - Affichage des données mensuelles de ventes
+  - Tableaux avec pieds de page pour les totaux
+  - Visualisations graphiques avec tooltips personnalisés
 
-## Starting the project locally
+- **Bilans Financiers**
+  - Visualisation des actifs et passifs
+  - Graphiques interactifs (bar chart et pie chart)
+  - Sections pliables/dépliables
 
-1. Clone the repository
+- **Seuil de Rentabilité**
+  - Analyse détaillée du point mort
+  - Calculs automatiques
 
+- **Besoin en Fonds de Roulement**
+  - Calcul dynamique basé sur paramètres utilisateur
+  - Délais de paiement ajustables
+  - Visualisation des impacts sur la trésorerie
+
+### Interface Utilisateur
+- Design responsive pour desktop et mobile
+- Mode sombre/clair
+- Navigation intuitive via menu latéral
+- Tableaux et graphiques interactifs
+
+## Aspects Techniques
+
+### Technologies Utilisées
+- **Frontend**: Next.js, React, Tailwind CSS
+- **État**: Zustand pour la gestion d'état
+- **UI Components**: Shadcn/UI, Radix UI
+- **Authentification**: NextAuth.js avec Keycloak
+- **Visualisation**: Graphiques interactifs
+
+### Structure du Projet
+- Architecture basée sur Next.js App Router
+- Composants modulaires et réutilisables
+- Gestion centralisée de l'état avec Zustand
+- Système d'authentification sécurisé
+
+## Installation et Démarrage
+
+1. Cloner le dépôt
    ```bash
-   git clone https://github.com/salimi-my/shadcn-ui-sidebar
-   ```
+   git clone [URL_DU_REPO]
+   cd finance-app
+   ``` 
 
-2. Install dependencies
-
+2. Installer les dépendances
    ```bash
-   cd shadcn-ui-sidebar
    npm install
+   
    ```
 
-3. Run the development server
+3. Configurer les variables d'environnement
+   - Copier `.env.example` vers `.env.local`
+   - Remplir les variables nécessaires
 
+4. Démarrer l'application en développement
    ```bash
    npm run dev
    ```
 
-## Demo
+## Développement et Contribution
 
-The app is hosted on Vercel. [Click here](https://shadcn-ui-sidebar.salimi.my) to visit.
-<br>
-Direct demo link: `https://shadcn-ui-sidebar.salimi.my`
+Pour contribuer au projet:
+1. Créer une branche pour votre fonctionnalité
+2. Développer et tester vos modifications
+3. Soumettre une pull request avec une description détaillée
 
-## Screenshots
+---
 
-#### Light mode
-
-![Light mode](/screenshots/screenshot-1.png)
-
-#### Dark mode
-
-![Dark mode](/screenshots/screenshot-2.png)
-
-#### Mini sidebar
-
-![Mini sidebar](/screenshots/screenshot-3.png)
-
-#### Sheet menu
-
-<img src="/screenshots/screenshot-4.png" width="300">
+ 2025 Finance App - Tous droits réservés
