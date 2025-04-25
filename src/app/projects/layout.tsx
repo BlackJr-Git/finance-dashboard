@@ -6,9 +6,5 @@ export default function DemoLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <>
-      <ContentLayout title="Mes Projets Financiers">{children}</ContentLayout>
-    </>
-  );
+  return <>{children}</>;
 }

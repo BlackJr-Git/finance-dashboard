@@ -15,9 +15,15 @@ export default function HomePage() {
             href="/"
             className="flex justify-start items-center hover:opacity-85 transition-opacity duration-300"
           >
-            <PanelsTopLeft className="w-6 h-6 mr-3" />
-            <span className="font-bold">shadcn/ui sidebar</span>
-            <span className="sr-only">shadcn/ui sidebar</span>
+            <Image
+              src="/images/logo-finance-2.png"
+              width={32}
+              height={32}
+              alt="logo"
+              className="w-6 h-6 mr-3"
+            />
+            <span className="font-bold">Finance App</span>
+            <span className="sr-only">Finance App</span>
           </Link>
           <nav className="ml-auto flex items-center gap-2">
             <Button
@@ -45,14 +51,14 @@ export default function HomePage() {
             </span>
             <div className="flex w-full items-center justify-center space-x-4 py-4 md:pb-6">
               <Button variant="default" asChild>
-                <Link href="/dashboard">
+                <Link href="/projects">
                   Commencer
                   <ArrowRightIcon className="ml-2" />
                 </Link>
               </Button>
               <Button variant="outline" asChild>
                 <Link
-                  href="https://ui.shadcn.com/"
+                  href="/about"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

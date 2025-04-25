@@ -34,17 +34,24 @@ type Group = {
   menus: Menu[];
 };
 
-export function getMenuList(pathname: string): Group[] {
+export const isActiveRoute = (pathname: string, route: string) => {
+  const cleanPath = pathname.split("?")[0].replace(/\/$/, "");
+  const cleanRoute = route.replace(/\/$/, "");
+  return cleanPath.endsWith(cleanRoute);
+};
+
+
+export function getMenuList(pathname: string, projectId?: string): Group[] {
   return [
     {
       groupLabel: "",
       menus: [
         {
-          href: "/dashboard",
+          href: `/projects/${projectId}/dashboard`,
           label: "Dashboard",
           icon: LayoutGrid,
           submenus: [],
-          active: pathname === "/dashboard"
+          active: pathname.includes("/dashboard")
         }
       ]
     },
@@ -52,46 +59,46 @@ export function getMenuList(pathname: string): Group[] {
       groupLabel: "Contenus",
       menus: [
         {
-          href: "/budget-de-caisse",
+          href: `/projects/${projectId}/budget-de-caisse`,
           label: "Budget de Caisse",
           icon: DollarSign,
           submenus: [],
-          active: pathname.startsWith("/budget-de-caisse")
+          active: pathname.includes("/budget-de-caisse")
         },
         {
-          href: "/bilans",
+          href: `/projects/${projectId}/bilans`,
           label: "Bilans",
           icon: FileText,
           submenus: [],
-          active: pathname === "/bilans"
+          active: pathname.includes("/bilans")
         },
         {
-          href: "/investissements-financements",
+          href: `/projects/${projectId}/investissements-financements`,
           label: "Investissements & Financements",
           icon: TrendingUp,
           submenus: [],
-          active: pathname === "/investissements-financements"
+          active: isActiveRoute(pathname, "/investissements-financements")
         },
         {
-          href: "/compte-resultats",
+          href: `/projects/${projectId}/compte-resultats`,
           label: "Compte des Résultats",
           icon: BarChart2,
           submenus: [],
-          active: pathname === "/compte-resultats"
+          active: isActiveRoute(pathname, "/compte-resultats")
         },
         {
-          href: "/seuils-rentabilites",
+          href: `/projects/${projectId}/seuils-rentabilites`,
           label: "Seuils de Rentabilité",
           icon: Target,
           submenus: [],
-          active: pathname === "/seuils-rentabilites"
+          active: isActiveRoute(pathname, "/seuils-rentabilites")
         },
         {
-          href: "/besoins-fonds-roulement",
+          href: `/projects/${projectId}/besoins-fonds-roulement`,
           label: "Besoin en Fonds de Roulement",
           icon: Briefcase,
           submenus: [],
-          active: pathname === "/besoins-fonds-roulement"
+          active: isActiveRoute(pathname, "/besoins-fonds-roulement")
         }
       ]
     },
