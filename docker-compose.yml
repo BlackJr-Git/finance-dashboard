@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # Service pour l'application Next.js en développement
+  finance-app:
+    image: node:20.13.1
+    ports:
+      - "4000:3000"
+    depends_on:
+      - finance-db
+    env_file:
+      - .env
+    extra_hosts:
+      - "bk-bp-junior.local.insse.ca:192.168.3.11"
+      - "ft-bp-junior.local.insse.ca:192.168.3.11"
+      - "api-gateway.erp.cd:192.168.2.22"
+      - "channels.local.insse.ca:192.168.3.11"
+      - "auth.pme.cd:192.168.2.215"
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: sh -c "npm install && npx prisma generate && npm run dev"
+    restart: unless-stopped
+
+  # Service PostgreSQL
+  finance-db:
+    image: postgres:16.0
+    # ports:
+    #   - "5432:5432"
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  # PgAdmin pour gérer la base de données (optionnel)
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   ports:
+  #     - "5050:80"
+  #   environment:
+  #     - PGADMIN_DEFAULT_EMAIL=admin@finance.app
+  #     - PGADMIN_DEFAULT_PASSWORD=admin
+  #   volumes:
+  #     - pgadmin_data:/var/lib/pgadmin
+  #   depends_on:
+  #     - finance-db
+  #   restart: unless-stopped
+
+volumes:
+  postgres_data:
+  # pgadmin_data:
