@@ -34,7 +34,7 @@ export function Sidebar() {
           variant="link"
           asChild
         >
-          <Link href="/dashboard" className="flex items-center gap-2">
+          <Link href="/projects" className="flex items-center gap-2">
             <Image
               src="/images/logo-finance-2.png"
               alt="Logo"

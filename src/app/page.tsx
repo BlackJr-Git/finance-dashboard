@@ -49,14 +49,14 @@ export default function HomePage() {
             <span className="max-w-[750px] text-center text-lg font-light text-foreground">
               Une application de gestion financière pour les entreprises.
             </span>
-            <div className="flex w-full items-center justify-center space-x-4 py-4 md:pb-6">
-              <Button variant="default" asChild>
+            <div className="flex w-full items-center justify-center space-x-4 md:pb-6">
+              <Button variant="default" asChild className="py-5">
                 <Link href="/projects">
                   Commencer
                   <ArrowRightIcon className="ml-2" />
                 </Link>
               </Button>
-              <Button variant="outline" asChild>
+              <Button variant="outline" asChild className="py-5">
                 <Link
                   href="/about"
                   target="_blank"

@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
+import { Plus_Jakarta_Sans } from "next/font/google";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"], // ou ['latin', 'vietnamese'] selon ton besoin
+  weight: ["200", "300", "400", "500", "600", "700", "800"], // choisis les weights que tu veux
+  variable: "--font-plus-jakarta" // pour utiliser avec Tailwind ou CSS vars
+});
 
 import "./globals.css";
 
@@ -41,8 +48,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={GeistSans.className}>
+    <html lang="fr" suppressHydrationWarning>
+      <body className={plusJakartaSans.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
           <Toaster />
